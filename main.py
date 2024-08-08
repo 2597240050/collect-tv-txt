@@ -568,7 +568,7 @@ except Exception as e:
 
 ################# 添加生成m3u文件
 # 报时
-print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
+#print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 
 channels_logos=read_txt_to_array('assets/logo.txt') #读入logo库
 def get_logo_by_channel_name(channel_name):
