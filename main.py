@@ -4,7 +4,10 @@ import re #正则
 import os
 from datetime import datetime
 
-
+# 执行开始时间
+timestart = datetime.now()
+# 报时
+#print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
     'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u',
