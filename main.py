@@ -10,27 +10,95 @@ timestart = datetime.now()
 #print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
-    'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u',
-    'https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8',
-    'https://raw.githubusercontent.com/Supprise0901/TVBox_live/main/live.txt',
-    'https://raw.githubusercontent.com/Guovin/TV/gd/result.txt', #每天自动更新1次
-    'https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt', #每天自动更新1次
-    'https://m3u.ibert.me/txt/fmml_ipv6.txt',
-    'https://m3u.ibert.me/txt/ycl_iptv.txt',
-    'https://m3u.ibert.me/txt/y_g.txt',
-    'https://m3u.ibert.me/txt/j_home.txt',
-    'https://raw.githubusercontent.com/gaotianliuyun/gao/master/list.txt',
-    'https://gitee.com/xxy002/zhiboyuan/raw/master/zby.txt',
-    'https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt', #每天早晚各自动更新1次 2024-06-03 17:50
-    'https://raw.githubusercontent.com/fenxp/iptv/main/live/ipv6.txt',  #1小时自动更新1次11:11 2024/05/13
-    'https://raw.githubusercontent.com/fenxp/iptv/main/live/tvlive.txt', #1小时自动更新1次11:11 2024/05/13
-    'https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt',  #每天自动更新1次 2024-06-24 16:37
-    'https://gitlab.com/p2v5/wangtv/-/raw/main/lunbo.txt',
-    'https://raw.githubusercontent.com/PizazzGY/TVBox/main/live.txt',  #ADD 2024-07-22 13:50
-    'https://raw.githubusercontent.com/wwb521/live/main/tv.m3u',  #ADD 2024-08-05 每10天更新一次
-    'https://gitcode.net/MZ011/BHJK/-/raw/master/BHZB1.txt',  #ADD 2024-08-05 
-    #'https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.txt',   #ADD 2024-08-05 每天更新一次，量太多转到blacklist处理
-    'http://47.99.102.252/live.txt' #ADD 2024-08-05 
+#猫TV线路',
+'https://2883.kstore.space/%E2%91%A0%E7%8C%ABTV%E7%BA%BF%E8%B7%AF',
+
+#新猫TV线路',
+'http://gg.gg/cctvgg',
+
+#①猫TV线路',
+'http://rihou.cc:567/gggg.nzk',
+#IPV6专线',
+'https://live.fanmingming.com/tv/m3u/ipv6.m3u',
+
+#港•澳•台',
+'http://home.jundie.top:81/Cat/tv/live.txt',
+
+#①更新列表',
+'http://rihou.cc:567/cctvgg',
+
+#开心频道',
+'http://ttkx.live:55/lib/kx2024.txt',
+
+#②春盈线路',
+'https://gitlink.org.cn/attachments/entries/get_file?download_url=https://www.gitlink.org.cn/api/hailin/tvboxme/raw/lives%2Ffeihu6.txt?ref=master',
+
+#⑤天微线路',
+'http://tvkj.top/tvlive.txt',
+ 
+#⑥蓝影兔源',
+'https://dimaston.github.io/live.m3u',
+ 
+#⑧临测线路',
+'http://rihou.cc:567/0620',
+
+#⑪V6明线路',
+'https://live.fanmingming.com/tv/m3u/ipv6.m3u',
+ 
+#⑬ipv6线路',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/drangjchen/IPTV/main/M3U/ipv6.m3u',
+ 
+#⑭开心线路',
+'http://ttkx.live:55/lib/kx2024.txt',
+
+#⑯梅州线路',
+'https://103.115.40.138:6164/down/k4Aj0TlH3wax',
+ 
+#⑰飞龙线路',
+'https://gitlab.com/tvtg/vip/-/raw/main/log.txt',
+
+#⑱欧华线路',
+'https://notabug.org/kan314/dd/raw/main/0426hua159.txt',
+ 
+#⑲测试线路',
+'https://yubox.xyz/live.txt',
+
+#②①综合线路',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u',
+ 
+#②②综合二线',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u',
+
+#②③综合三线',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/dxawi/0/main/tvlive.txt',
+
+#②④综合四线',
+'https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u',
+
+#②⑤探探线路',
+'http://www.lyyytv.cn/yt/zhibo/1.txt',
+
+#②⑥范明线路',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u',
+
+#②⑦范明电台',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/radio/m3u/index.m3u',
+
+#②⑨肥猫线路',
+'http://我不是.肥猫.live/TV/tvzb.txt',
+
+#③⑩俊于线路',
+'http://home.jundie.top:81/Cat/tv/live.txt',
+
+#③①斗鱼线路',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/douyuyqk.m3u',
+
+#③②虎牙线路',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/huyayqk.m3u',
+
+#③⑤MV专线',
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt'
+    
     
 ]
 
