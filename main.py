@@ -10,8 +10,12 @@ timestart = datetime.now()
 #print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
-#猫TV线路',
+    'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u',
+    'https://r#猫TV线路',
 'https://2883.kstore.space/%E2%91%A0%E7%8C%ABTV%E7%BA%BF%E8%B7%AF',
+
+#香港电视线路",
+'http://mywlkj.ddns.net:5212/f/EErCL/%E5%8F%B0%E6%B9%BE%E7%94%B5%E8%A7%86TV.txt',
 
 #新猫TV线路',
 'http://gg.gg/cctvgg',
@@ -98,8 +102,6 @@ urls = [
 
 #③⑤MV专线',
 'https://github.moeyy.xyz/https://raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt'
-    
-    
 ]
 
 #read BlackList 2024-06-17 15:02
@@ -393,8 +395,8 @@ def process_url(url):
             data = response.read()
             # 将二进制数据解码为字符串
             text = data.decode('utf-8')
-            channel_name=""
-            channel_address=""
+            # channel_name=""
+            # channel_address=""
 
             #处理m3u和m3u8，提取channel_name和channel_address
             if get_url_file_extension(url)==".m3u" or get_url_file_extension(url)==".m3u8":
@@ -404,8 +406,19 @@ def process_url(url):
             lines = text.split('\n')
             print(f"行数: {len(lines)}")
             for line in lines:
-                process_channel_line(line) # 每行按照规则进行分发
-            
+                if  "#genre#" not in line and "," in line and "://" in line:
+                    # 拆分成频道名和URL部分
+                    channel_name, channel_address = line.split(',', 1)
+                    #需要加处理带#号源=予加速源
+                    if "#" not in channel_address:
+                        process_channel_line(line) # 如果没有井号，则照常按照每行规则进行分发
+                    else: 
+                        # 如果有“#”号，则根据“#”号分隔
+                        url_list = channel_address.split('#')
+                        for channel_url in url_list:
+                            newline=f'{channel_name},{channel_url}'
+                            process_channel_line(newline)
+
             other_lines.append('\n') #每个url处理完成后，在other_lines加个回车 2024-08-02 10:46
 
     except Exception as e:
