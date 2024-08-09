@@ -168,7 +168,7 @@ def clean_url(lines):
 if __name__ == "__main__":
     # 定义要访问的多个URL
     urls = [
-     'https://raw.githubusercontent.com/ssili126/tv/main/itvlist.txt' #每天自动更新1次
+     '' #每天自动更新1次
     ]
     for url in urls:
         print(f"处理URL: {url}")
