@@ -10,8 +10,7 @@ timestart = datetime.now()
 #print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
-    'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u',
-    'https://r#猫TV线路',
+#猫TV线路',
 'https://2883.kstore.space/%E2%91%A0%E7%8C%ABTV%E7%BA%BF%E8%B7%AF',
 
 #香港电视线路",
@@ -88,9 +87,6 @@ urls = [
 #②⑦范明电台',
 'https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/radio/m3u/index.m3u',
 
-#②⑨肥猫线路',
-'http://我不是.肥猫.live/TV/tvzb.txt',
-
 #③⑩俊于线路',
 'http://home.jundie.top:81/Cat/tv/live.txt',
 
@@ -102,6 +98,7 @@ urls = [
 
 #③⑤MV专线',
 'https://github.moeyy.xyz/https://raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt'
+    
 ]
 
 #read BlackList 2024-06-17 15:02
