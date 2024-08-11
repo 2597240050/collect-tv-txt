@@ -10,17 +10,12 @@ timestart = datetime.now()
 #print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
-#猫TV线路',
-'https://2883.kstore.space/%E2%91%A0%E7%8C%ABTV%E7%BA%BF%E8%B7%AF',
-
-#香港电视线路",
-'http://mywlkj.ddns.net:5212/f/EErCL/%E5%8F%B0%E6%B9%BE%E7%94%B5%E8%A7%86TV.txt',
-
 #新猫TV线路',
 'http://gg.gg/cctvgg',
 
 #①猫TV线路',
 'http://rihou.cc:567/gggg.nzk',
+
 #IPV6专线',
 'https://live.fanmingming.com/tv/m3u/ipv6.m3u',
 
@@ -54,8 +49,6 @@ urls = [
 #⑭开心线路',
 'http://ttkx.live:55/lib/kx2024.txt',
 
-#⑯梅州线路',
-'https://103.115.40.138:6164/down/k4Aj0TlH3wax',
  
 #⑰飞龙线路',
 'https://gitlab.com/tvtg/vip/-/raw/main/log.txt',
@@ -94,11 +87,7 @@ urls = [
 'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/douyuyqk.m3u',
 
 #③②虎牙线路',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/huyayqk.m3u',
-
-#③⑤MV专线',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt'
-    
+'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/huyayqk.m3u'
 ]
 
 #read BlackList 2024-06-17 15:02
@@ -598,7 +587,7 @@ all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
              ["D｜浙江频道,#genre#"] + sorted(set(correct_name_data(corrections_name,zj_lines))) + ['\n'] + \
              ["D｜江苏频道,#genre#"] + sorted(set(correct_name_data(corrections_name,jsu_lines))) + ['\n'] + \
              ["D｜湖南频道,#genre#"] + sorted(set(correct_name_data(corrections_name,hn_lines))) + ['\n'] + \
-             ["D｜湖北频道,#genre#"] + sorted(set(correct_name_data(corrections_name,hb_lines))) + ['\n'] + \
+             ["D｜湖北频道,#genre#"] + sort_data(hb_dictionary,set(correct_name_data(corrections_name,hb_lines))) + ['\n'] + \
              ["D｜安徽频道,#genre#"] + sorted(set(correct_name_data(corrections_name,ah_lines))) + ['\n'] + \
              ["D｜广东频道,#genre#"] + sorted(set(correct_name_data(corrections_name,gd_lines))) + ['\n'] + \
              ["D｜海南频道,#genre#"] + sorted(set(correct_name_data(corrections_name,hain_lines))) + ['\n'] + \
@@ -660,7 +649,7 @@ def get_logo_by_channel_name(channel_name):
             return url
     return None
 
-output_text = "#EXTM3U x-tvg-url='https://live.fanmingming.com/e.xml'\n"
+output_text = '#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n'
 
 with open(output_file, "r", encoding='utf-8') as file:
     input_text = file.read()
