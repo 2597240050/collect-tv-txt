@@ -1,4 +1,4 @@
-https://github.com/kimwang1978/collect-tv-txt/actions
+https://github.com/kimwang1978/collect-tv-txt/
 # collect-tv-txt
 
 自动收集整理直播源
