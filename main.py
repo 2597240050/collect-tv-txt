@@ -10,8 +10,8 @@ timestart = datetime.now()
 #print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
-#①猫TV线路',
-'http://rihou.cc:567/gggg.nzk',
+#香港电视线路",
+'http://mywlkj.ddns.net:5212/f/EErCL/%E5%8F%B0%E6%B9%BE%E7%94%B5%E8%A7%86TV.txt',
 
 #IPV6明专线',
 'https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u',
@@ -19,24 +19,21 @@ urls = [
 #港•澳•台',
 'http://home.jundie.top:81/Cat/tv/live.txt',
 
-#①更新列表',
-'http://rihou.cc:567/cctvgg',
-
 #开心频道',
 'http://ttkx.live:55/lib/kx2024.txt',
 
 #②春盈线路',
 'https://gitlink.org.cn/attachments/entries/get_file?download_url=https://www.gitlink.org.cn/api/hailin/tvboxme/raw/lives%2Ffeihu6.txt?ref=master',
 
-#⑤天微线路',
-'http://tvkj.top/tvlive.txt',
- 
-#⑥蓝影兔源',
+
+#临时⑥蓝影兔源',
 'https://fanmingming.com/txt?url=https://dimaston.github.io/live.m3u',
  
 #⑧临测线路',
 'http://rihou.cc:567/0620',
 
+#⑨野火线路",
+'https://fanmingming.com/txt?url=https://chuxinya.top/f/v1BuA/%E9%87%8E%E7%81%AB.m3u',
  
 #⑬ipv6线路',
 'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/drangjchen/IPTV/main/M3U/ipv6.m3u',
@@ -44,12 +41,12 @@ urls = [
 #⑭开心线路',
 'http://ttkx.live:55/lib/kx2024.txt',
 
+#⑯梅州线路",
+'https://103.115.40.138:6164/down/k4Aj0TlH3wax',
  
 #⑰飞龙线路',
 'https://gitlab.com/tvtg/vip/-/raw/main/log.txt',
 
-#⑱欧华线路',
-'https://notabug.org/kan314/dd/raw/main/0426hua159.txt',
  
 #⑲测试线路',
 'https://yubox.xyz/live.txt',
