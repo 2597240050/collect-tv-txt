@@ -220,7 +220,7 @@ def convert_m3u_to_txt(m3u_content):
             # 获取频道名称（假设频道名称在引号后）
             channel_name = line.split(',')[-1].strip()
         # 处理 URL 行
-        elif line.startswith("http"):
+        elif line.startswith("http") or line.startswith("rtmp") or line.startswith("p3p") :
             txt_lines.append(f"{channel_name},{line.strip()}")
     
     # 将结果合并成一个字符串，以换行符分隔
@@ -555,7 +555,7 @@ for whitelist_line in whitelist_auto_lines:
 # 合并所有对象中的行文本（去重，排序后拼接）
 version=datetime.now().strftime("%Y%m%d-%H-%M-%S")+",url"
 all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
-             ["🌸奥运频道,#genre#"] + sort_data(Olympics_2024_Paris_dictionary,set(correct_name_data(corrections_name,Olympics_2024_Paris_lines))) + ['\n'] + \
+             #["🌸奥运频道,#genre#"] + sort_data(Olympics_2024_Paris_dictionary,set(correct_name_data(corrections_name,Olympics_2024_Paris_lines))) + ['\n'] + \
              ["央视频道,#genre#"] + sort_data(ys_dictionary,set(correct_name_data(corrections_name,ys_lines))) + ['\n'] + \
              ["卫视频道,#genre#"] + sort_data(ws_dictionary,set(correct_name_data(corrections_name,ws_lines))) + ['\n'] + \
              ["上海频道,#genre#"] + sort_data(sh_dictionary,set(correct_name_data(corrections_name,sh_lines))) + ['\n'] + \
@@ -683,6 +683,14 @@ print(f"开始时间: {timestart_str}")
 print(f"结束时间: {timeend_str}")
 print(f"执行时间: {minutes} 分 {seconds} 秒")
 
+combined_blacklist_hj = len(combined_blacklist)
+all_lines_hj = len(all_lines)
+other_lines_hj = len(other_lines)
+print(f"blacklist行数: {combined_blacklist_hj} ")
+print(f"merged_output.txt行数: {all_lines_hj} ")
+print(f"others_output.txt行数: {other_lines_hj} ")
+
+
 #备用1：http://tonkiang.us
 #备用2：
-#备用3：
+#备用3：(BlackList检测对象)http,rtmp,p3p
