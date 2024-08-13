@@ -10,14 +10,11 @@ timestart = datetime.now()
 #print(f"time: {datetime.now().strftime("%Y%m%d_%H_%M_%S")}")
 # 定义要访问的多个URL
 urls = [
-#新猫TV线路',
-'http://gg.gg/cctvgg',
-
 #①猫TV线路',
 'http://rihou.cc:567/gggg.nzk',
 
-#IPV6专线',
-'https://live.fanmingming.com/tv/m3u/ipv6.m3u',
+#IPV6明专线',
+'https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u',
 
 #港•澳•台',
 'http://home.jundie.top:81/Cat/tv/live.txt',
@@ -35,16 +32,14 @@ urls = [
 'http://tvkj.top/tvlive.txt',
  
 #⑥蓝影兔源',
-'https://dimaston.github.io/live.m3u',
+'https://fanmingming.com/txt?url=https://dimaston.github.io/live.m3u',
  
 #⑧临测线路',
 'http://rihou.cc:567/0620',
 
-#⑪V6明线路',
-'https://live.fanmingming.com/tv/m3u/ipv6.m3u',
  
 #⑬ipv6线路',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/drangjchen/IPTV/main/M3U/ipv6.m3u',
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/drangjchen/IPTV/main/M3U/ipv6.m3u',
  
 #⑭开心线路',
 'http://ttkx.live:55/lib/kx2024.txt',
@@ -60,34 +55,31 @@ urls = [
 'https://yubox.xyz/live.txt',
 
 #②①综合线路',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u',
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u',
  
 #②②综合二线',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u',
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u',
 
 #②③综合三线',
 'https://github.moeyy.xyz/https://raw.githubusercontent.com/dxawi/0/main/tvlive.txt',
-
-#②④综合四线',
-'https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u',
 
 #②⑤探探线路',
 'http://www.lyyytv.cn/yt/zhibo/1.txt',
 
 #②⑥范明线路',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u',
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u',
 
 #②⑦范明电台',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/radio/m3u/index.m3u',
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/fanmingming/live/main/radio/m3u/index.m3u',
 
 #③⑩俊于线路',
 'http://home.jundie.top:81/Cat/tv/live.txt',
 
 #③①斗鱼线路',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/douyuyqk.m3u',
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/douyuyqk.m3u',
 
 #③②虎牙线路',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/huyayqk.m3u'
+'https://fanmingming.com/txt?url=https://github.moeyy.xyz/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/huyayqk.m3u'
 ]
 
 #read BlackList 2024-06-17 15:02
@@ -580,7 +572,6 @@ all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
              ["纪录片,#genre#"] + sort_data(jlp_dictionary,set(correct_name_data(corrections_name,jlp_lines)))+ ['\n'] + \
              ["动画片,#genre#"] + sorted(set(dhp_lines)) + ['\n'] + \
              ["戏曲频道,#genre#"] + sort_data(xq_dictionary,set(correct_name_data(corrections_name,xq_lines))) + ['\n'] + \
-             ["解说频道,#genre#"] + sorted(set(js_lines)) + ['\n'] + \
              ["综艺频道,#genre#"] + sorted(set(correct_name_data(corrections_name,zy_lines))) + ['\n'] + \
              ["音乐频道,#genre#"] + sorted(set(yy_lines)) + ['\n'] + \
              ["游戏频道,#genre#"] + sorted(set(game_lines)) + ['\n'] + \
@@ -613,6 +604,7 @@ all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
              ["D｜四川频道,#genre#"] + sorted(set(correct_name_data(corrections_name,sc_lines))) + ['\n'] + \
              ["D｜天津频道,#genre#"] + sorted(set(correct_name_data(corrections_name,tj_lines))) + ['\n'] + \
              ["D｜新疆频道,#genre#"] + sorted(set(correct_name_data(corrections_name,xj_lines))) + ['\n'] + \
+             ["解说频道,#genre#"] + sorted(set(js_lines)) + ['\n'] + \
              ["春晚,#genre#"] + sort_data(cw_dictionary,set(cw_lines))  + ['\n'] + \
              ["直播中国,#genre#"] + sorted(set(correct_name_data(corrections_name,zb_lines))) + ['\n'] + \
              ["MTV,#genre#"] + sorted(set(correct_name_data(corrections_name,mtv_lines))) + ['\n'] + \
@@ -649,7 +641,7 @@ def get_logo_by_channel_name(channel_name):
             return url
     return None
 
-output_text = '#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml"\n'
+output_text = '#EXTM3U x-tvg-url="https://live.fanmingming.com/e.xml,https://epg.112114.xyz/pp.xml.gz,https://assets.livednow.com/epg.xml"\n'
 
 with open(output_file, "r", encoding='utf-8') as file:
     input_text = file.read()
