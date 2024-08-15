@@ -13,15 +13,8 @@ urls = [
 #IPV6明专线',
 'https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u',
 
-#港•澳•台',
-'http://home.jundie.top:81/Cat/tv/live.txt',
-
-#开心频道',
-'http://ttkx.live:55/lib/kx2024.txt',
-
 #②春盈线路',
 'https://gitlink.org.cn/attachments/entries/get_file?download_url=https://www.gitlink.org.cn/api/hailin/tvboxme/raw/lives%2Ffeihu6.txt?ref=master',
-
 
 #临时⑥蓝影兔源',
 'https://fanmingming.com/txt?url=https://dimaston.github.io/live.m3u',
@@ -31,7 +24,6 @@ urls = [
 
 #⑨野火线路",
 'https://fanmingming.com/txt?url=https://chuxinya.top/f/v1BuA/%E9%87%8E%E7%81%AB.m3u',
- 
  
 #⑭开心线路',
 'http://ttkx.live:55/lib/kx2024.txt',
