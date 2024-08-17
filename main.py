@@ -16,15 +16,9 @@ urls = [
 #②春盈线路',
 'https://gitlink.org.cn/attachments/entries/get_file?download_url=https://www.gitlink.org.cn/api/hailin/tvboxme/raw/lives%2Ffeihu6.txt?ref=master',
 
-#临时⑥蓝影兔源',
-'https://fanmingming.com/txt?url=https://dimaston.github.io/live.m3u',
- 
 #⑧临测线路',
 'http://rihou.cc:567/0620',
 
-#⑨野火线路",
-'https://fanmingming.com/txt?url=https://chuxinya.top/f/v1BuA/%E9%87%8E%E7%81%AB.m3u',
- 
 #⑭开心线路',
 'http://ttkx.live:55/lib/kx2024.txt',
  
@@ -41,8 +35,7 @@ urls = [
 'http://www.lyyytv.cn/yt/zhibo/1.txt',
 
 #③⑩俊于线路',
-'http://home.jundie.top:81/Cat/tv/live.txt',
-    #''
+'http://home.jundie.top:81/Cat/tv/live.txt'
 ]
 
 #read BlackList 2024-06-17 15:02
@@ -519,11 +512,13 @@ for whitelist_line in whitelist_auto_lines:
 
 
 # 合并所有对象中的行文本（去重，排序后拼接）
+# ["奥运频道,#genre#"] + sort_data(Olympics_2024_Paris_dictionary,set(correct_name_data(corrections_name,Olympics_2024_Paris_lines))) + ['\n'] + \
 version=datetime.now().strftime("%Y%m%d-%H-%M-%S")+",url"
 all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
-             ["奥运频道,#genre#"] + sort_data(Olympics_2024_Paris_dictionary,set(correct_name_data(corrections_name,Olympics_2024_Paris_lines))) + ['\n'] + \
+             ["🆕专享电影,#genre#"] + read_txt_to_array('主频道/♪专享电影.txt') + ['\n'] + \
              ["🌐央视频道,#genre#"] + sort_data(ys_dictionary,set(correct_name_data(corrections_name,ys_lines))) + ['\n'] + \
              ["📡卫视频道,#genre#"] + sort_data(ws_dictionary,set(correct_name_data(corrections_name,ws_lines))) + ['\n'] + \
+             ["🆕优质源,#genre#"] + read_txt_to_array('主频道/♪优质源.txt') + ['\n'] + \
              ["上海频道,#genre#"] + sort_data(sh_dictionary,set(correct_name_data(corrections_name,sh_lines))) + ['\n'] + \
              ["体育频道,#genre#"] + sort_data(ty_dictionary,set(correct_name_data(corrections_name,ty_lines))) + ['\n'] + \
              ["电影频道,#genre#"] + sort_data(dy_dictionary,set(correct_name_data(corrections_name,dy_lines))) + ['\n'] + \
@@ -543,7 +538,7 @@ all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
              ["☘️湖南频道,#genre#"] + sorted(set(correct_name_data(corrections_name,hn_lines))) + ['\n'] + \
              ["☘️湖北频道,#genre#"] + sort_data(hb_dictionary,set(correct_name_data(corrections_name,hb_lines))) + ['\n'] + \
              ["☘️安徽频道,#genre#"] + sorted(set(correct_name_data(corrections_name,ah_lines))) + ['\n'] + \
-             ["☘️广东频道,#genre#"] + sorted(set(correct_name_data(corrections_name,gd_lines))) + ['\n'] + \
+             ["☘️广东频道,#genre#"] + sort_data(gd_dictionary,set(correct_name_data(corrections_name,gd_lines))) + ['\n'] + \
              ["☘️海南频道,#genre#"] + sorted(set(correct_name_data(corrections_name,hain_lines))) + ['\n'] + \
              ["☘️内蒙频道,#genre#"] + sorted(set(correct_name_data(corrections_name,nm_lines))) + ['\n'] + \
              ["☘️辽宁频道,#genre#"] + sorted(set(correct_name_data(corrections_name,ln_lines))) + ['\n'] + \
@@ -571,7 +566,8 @@ all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
              ["春晚,#genre#"] + sort_data(cw_dictionary,set(cw_lines))  + ['\n'] + \
              ["直播中国,#genre#"] + sorted(set(correct_name_data(corrections_name,zb_lines))) + ['\n'] + \
              ["MTV,#genre#"] + sorted(set(correct_name_data(corrections_name,mtv_lines))) + ['\n'] + \
-             ["收音机频道,#genre#"] + sort_data(radio_dictionary,set(radio_lines)) 
+             ["收音机频道,#genre#"] + sort_data(radio_dictionary,set(radio_lines))  + ['\n'] + \
+             ["❤️[以家人之名],#genre#"] + read_txt_to_array('主频道/特供频道/♪以家人之名.txt')
 
 
 # 将合并后的文本写入文件
@@ -659,4 +655,4 @@ print(f"others_output.txt行数: {other_lines_hj} ")
 
 #备用1：http://tonkiang.us
 #备用2：https://www.zoomeye.hk
-#备用3：(BlackList检测对象)http,rtmp,p3p,rtp
+#备用3：(BlackList检测对象)http,rtmp,p3p,rtp（rtsp，p2p）
