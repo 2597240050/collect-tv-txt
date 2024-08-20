@@ -22,17 +22,11 @@ urls = [
 #⑭开心线路',
 'http://ttkx.live:55/lib/kx2024.txt',
  
-#⑰飞龙线路',
-'https://gitlab.com/tvtg/vip/-/raw/main/log.txt',
-
-#⑲测试线路',
-'https://yubox.xyz/live.txt',
-
 #②③综合三线',
 'https://github.moeyy.xyz/https://raw.githubusercontent.com/dxawi/0/main/tvlive.txt',
 
-#②⑤探探线路',
-'http://www.lyyytv.cn/yt/zhibo/1.txt',
+#小二综合4",
+'https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1716213337323/live3.txt', 
 
 #③⑩俊于线路',
 'http://home.jundie.top:81/Cat/tv/live.txt'
@@ -567,7 +561,7 @@ all_lines =  ["更新时间,#genre#"] +[version] + ['\n'] +\
              ["直播中国,#genre#"] + sorted(set(correct_name_data(corrections_name,zb_lines))) + ['\n'] + \
              ["MTV,#genre#"] + sorted(set(correct_name_data(corrections_name,mtv_lines))) + ['\n'] + \
              ["收音机频道,#genre#"] + sort_data(radio_dictionary,set(radio_lines))  + ['\n'] + \
-             ["❤️[以家人之名],#genre#"] + read_txt_to_array('主频道/特供频道/♪以家人之名.txt')
+             ["❤️以家人之名,#genre#"] + read_txt_to_array('主频道/特供频道/♪以家人之名.txt')
 
 
 # 将合并后的文本写入文件
