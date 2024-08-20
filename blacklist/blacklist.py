@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 import os
 from urllib.parse import urlparse
-import socket  #check p3p源
+import socket  #check p3p源 rtp源
 import subprocess #check rtmp源
 
 timestart = datetime.now()
@@ -40,6 +40,8 @@ def check_url(url, timeout=6):
             success = check_p3p_url(url, timeout)
         elif url.startswith("rtmp"):
             success = check_rtmp_url(url, timeout)
+        elif url.startswith("rtp"):
+            success = check_rtp_url(url, timeout)
 
         # 如果执行到这一步，没有异常，计算时间
         elapsed_time = (time.time() - start_time) * 1000  # 转换为毫秒
@@ -61,6 +63,25 @@ def check_rtmp_url(url, timeout):
     except Exception as e:
         print(f"Error checking {url}: {e}")
     return False
+
+def check_rtp_url(url, timeout):
+    try:
+        # 解析URL
+        parsed_url = urlparse(url)
+        
+        # 提取主机名（IP地址）和端口号
+        host = parsed_url.hostname
+        port = parsed_url.port
+
+        # 创建一个 socket 连接
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.settimeout(timeout)  # 设置超时时间
+            s.connect((host, port))
+            s.sendto(b'', (host, port))  # 发送空的UDP数据包
+            s.recv(1)  # 尝试接收数据
+        return True
+    except (socket.timeout, socket.error):
+        return False
 
 def check_p3p_url(url, timeout):
     try:
@@ -105,7 +126,7 @@ def process_line(line):
     return None, None
 
 # 多线程处理文本并检测URL
-def process_urls_multithreaded(lines, max_workers=28):
+def process_urls_multithreaded(lines, max_workers=30):
     blacklist =  [] 
     successlist = []
 
@@ -162,8 +183,10 @@ def convert_m3u_to_txt(m3u_content):
             txt_lines.append(f"{channel_name},{line.strip()}")
     
     # 将结果合并成一个字符串，以换行符分隔
-    return '\n'.join(txt_lines)
+    # return '\n'.join(txt_lines)
+    return txt_lines
 
+url_statistics=[]
 
 def process_url(url):
     try:
@@ -174,9 +197,12 @@ def process_url(url):
             # 将二进制数据解码为字符串
             text = data.decode('utf-8')
             if get_url_file_extension(url)==".m3u" or get_url_file_extension(url)==".m3u8":
-                urls_all_lines.append(convert_m3u_to_txt(text))
+                m3u_lines=convert_m3u_to_txt(text)
+                url_statistics.append(f"{len(m3u_lines)},{url.strip()}")
+                urls_all_lines.extend(m3u_lines) # 注意：extend
             elif get_url_file_extension(url)==".txt":
                 lines = text.split('\n')
+                url_statistics.append(f"{len(lines)},{url.strip()}")
                 for line in lines:
                     if  "#genre#" not in line and "," in line and "://" in line:
                         #channel_name=line.split(',')[0].strip()
@@ -230,39 +256,16 @@ def split_url(lines):
             # 如果有“#”号，则根据“#”号分隔
             url_list = channel_address.split('#')
             for url in url_list:
-                newline=f'{channel_name},{url}'
-                newlines.append(line)
+                if "://" in url: 
+                    newline=f'{channel_name},{url}'
+                    newlines.append(line)
     return newlines
+
+
 
 if __name__ == "__main__":
     # 定义要访问的多个URL
     urls = [
-        'https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u',
-        'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u',
-        'https://gitlab.com/p2v5/wangtv/-/raw/main/wang-tvlive.txt',
-        'https://raw.githubusercontent.com/kimwang1978/tvbox/main/%E5%A4%A9%E5%A4%A9%E5%BC%80%E5%BF%83/lives/%E2%91%AD%E5%BC%80%E5%BF%83%E7%BA%BF%E8%B7%AF.txt',
-        'https://raw.githubusercontent.com/mlvjfchen/TV/main/iptv_list.txt', 
-        'https://raw.githubusercontent.com/gdstchdr1/IPTV/main/bc.txt',  #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/skddyj/iptv/main/IPTV.m3u',  #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/wwb521/live/main/tv.m3u',  #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/lalifeier/IPTV/main/txt/IPTV.txt',  #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/yoursmile66/TVBox/main/live.txt',  #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8', #15分钟更新1次   #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/PizazzGY/TVBox/main/live.txt', #ADD 【2024-08-01 10:40:29】
-        'https://raw.githubusercontent.com/pxiptv/live/main/iptv.txt', #ADD 【2024-08-02 16:48:40】#每日更新1次
-        'https://notabug.org/vnjd/yydu/raw/master/yyfug.txt', #ADD 【2024-08-06】
-        'https://tvkj.top/tvlive.txt', #ADD 【2024-08-06】
-        'https://pan.beecld.com/f/OXMcA/%E6%98%A5%E8%B5%A2%E5%A4%A9%E4%B8%8B.txt', #ADD 【2024-08-06】
-        'http://kxrj.site:55/lib/kx2024.txt',   #ADD 【2024-08-07】
-        'https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.txt',   #ADD 2024-08-05 每天更新一次，量太多转到blacklist处理
-        'https://raw.githubusercontent.com/balala2oo8/iptv/main/o.m3u',   #ADD 【2024-08-07】#每日更新2次
-        'https://wzsvip.github.io/ipv4.txt',   #ADD 【2024-08-08】
-        'http://wz.42web.io/ipv4.txt',   #ADD 【2024-08-08】
-        'https://wzsvip.github.io/ipv4.m3u',   #ADD 【2024-08-08】
-        #'http://ttkx.live:55/lib/kx2024.txt',   #ADD 【2024-08-10】每日更新3次，移动到main.py
-        'http://mywlkj.ddns.net:5212/f/EErCL/%E5%8F%B0%E6%B9%BE%E7%94%B5%E8%A7%86TV.txt',   #ADD 【2024-08-10】
-        'http://gg.gg/cctvgg'   #ADD 【2024-08-10】
-        #'',
         #''
     ]
     for url in urls:
@@ -283,17 +286,16 @@ if __name__ == "__main__":
     # 读取输入文件内容
     lines1 = read_txt_file(input_file1)
     lines2 = read_txt_file(input_file2)
-    # lines=list(set(urls_all_lines + lines1 + lines2))
-    lines=set(urls_all_lines + lines1 + lines2) # 从list变成集合提供检索效率
+    lines=urls_all_lines + lines1 + lines2 # 从list变成集合提供检索效率⇒发现用了set后加#合并多行url，故去掉
     # 计算合并后合计个数
     urls_hj_before = len(lines)
 
     # 分级带#号直播源地址
-    lines=set(split_url(lines))
+    lines=split_url(lines)
     urls_hj_before2 = len(lines)
 
     # 去$
-    lines=set(clean_url(lines))
+    lines=clean_url(lines)
     urls_hj_before3 = len(lines)
 
     # 去重
@@ -309,8 +311,8 @@ if __name__ == "__main__":
         time_str = item.split(',')[0].replace('ms', '')
         return float(time_str)
     
-    successlist=sorted(set(successlist), key=successlist_sort_key)
-    blacklist=sorted(set(blacklist))
+    successlist=sorted(successlist, key=successlist_sort_key)
+    blacklist=sorted(blacklist)
 
     # 计算check后ok和ng个数
     urls_ok = len(successlist)
@@ -380,5 +382,6 @@ if __name__ == "__main__":
     print(f"  urls_ok: {urls_ok} ")
     print(f"  urls_ng: {urls_ng} ")
             
-
+for statistics in url_statistics: #查看各个url的量有多少 2024-08-19
+    print(statistics)
     
