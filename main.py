@@ -11,22 +11,11 @@ timestart = datetime.now()
 # 定义要访问的多个URL
 urls = [
 #IPV6明专线',
-'https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/ipv6.m3u',
+'https://tv.iill.top/m3u/Live',
 
 #②春盈线路',
-'https://gitlink.org.cn/attachments/entries/get_file?download_url=https://www.gitlink.org.cn/api/hailin/tvboxme/raw/lives%2Ffeihu6.txt?ref=master',
+'https://gongdian.top/tv/m3u',
 
-#⑧临测线路',
-'http://rihou.cc:567/0620',
-
-#⑭开心线路',
-'http://ttkx.live:55/lib/kx2024.txt',
- 
-#②③综合三线',
-'https://github.moeyy.xyz/https://raw.githubusercontent.com/dxawi/0/main/tvlive.txt',
-
-#小二综合4",
-'https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1716213337323/live3.txt', 
 
 #③⑩俊于线路',
 'http://home.jundie.top:81/Cat/tv/live.txt'
