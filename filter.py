@@ -4,8 +4,11 @@ import time
 import urllib.request
 import re
 from urllib.error import URLError, HTTPError
-import ffmpeg
 
+import cv2
+import requests
+
+import random
 
 def read_txt_to_array(file_name):
     try:
@@ -19,6 +22,17 @@ def read_txt_to_array(file_name):
     except Exception as e:
         print(f"An error occurred: {e}")
         return []
+    
+
+# 随机获取User-Agent,留着将来备用
+def get_random_user_agent():
+    USER_AGENTS = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+    ]
+    return random.choice(USER_AGENTS)
 
 # 检测URL是否可访问并记录响应时间
 def check_url(url, timeout=6):
@@ -39,7 +53,7 @@ def check_url(url, timeout=6):
                 if response.status == 200:
                     status_ok = True
                     # 尝试获取视频分辨率
-                    # resolution = get_video_resolution(url)
+                    width, height,span_time = get_video_dimensions(url, timeout)
     except HTTPError as e:
         print(f"HTTP Error: {e.code} - {e.reason},{url}")
     except URLError as e:
@@ -47,7 +61,31 @@ def check_url(url, timeout=6):
     except Exception as e:
         print(f"Error checking url: {e},{url}")
 
-    return elapsed_time, status_ok
+    return elapsed_time,status_ok,width, height,span_time
+
+def get_video_dimensions(url, timeout):
+    try:
+        start_time = time.time()
+        print(f"checking url dimensions:{url}")
+
+        response = requests.head(url, timeout=timeout)
+        response.raise_for_status()
+
+        cap = cv2.VideoCapture(url)
+        if not cap.isOpened():
+            return 0, 0, 0
+
+        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+        cap.release()
+
+        span_time=round(time.time() - start_time, 3)
+        return width, height,span_time
+
+    except (requests.RequestException, cv2.error, Exception):
+        return 0, 0, 0
+    
 
 # def get_video_resolution(url):
 #     try:
@@ -68,12 +106,11 @@ def process_line(line):
     parts = line.split(',')
     if len(parts) == 2:
         name, url = parts
-        elapsed_time, is_valid= check_url(url.strip())
-        if is_valid:
-            return elapsed_time, line.strip()
-        else:
-            return 0.0, line.strip()
-    return  0.0, line.strip()
+        # elapsed_time, is_valid,width, height,span_time= check_url(url.strip())
+        # return elapsed_time, is_valid,width, height,span_time
+        width, height,span_time= get_video_dimensions(url.strip(), 6)
+        return width, height,span_time
+    return  0,0,0,0,0
 
 
 #########################分割线########################
@@ -86,8 +123,10 @@ for line in merged_output_lines:
     if  "://" not in line:
         new_merged_output_lines.append(line)
     if  "#genre#" not in line and "," in line and "://" in line:
-        elapsed_time, line= process_line(line)
-        newline=f"{elapsed_time},{line}"
+        # elapsed_time, is_valid,width, height,span_time= process_line(line)
+        break  
+        width, height,span_time= process_line(line)
+        newline=f"{line},{width}x{height},{span_time}"
         new_merged_output_lines.append(newline)    #.append(f"{elapsed_time:.2f}ms,{result}")
 
 
